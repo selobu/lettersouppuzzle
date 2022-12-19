@@ -5,6 +5,7 @@ from .modulesconfig import ERROR_CODES
 
 class ErrorCode(Exception):
     def __init__(self, code, message=None):
+        code = str(code)
         if code not in ERROR_CODES.keys():
             closed_error_code = difflib.get_close_matches(code, ERROR_CODES.keys())
             raise Exception(
