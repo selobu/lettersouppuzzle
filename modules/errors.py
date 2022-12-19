@@ -1,9 +1,6 @@
 # coding: utf-8
 import difflib # ref 
-
-ERROR_CODES={'401':'Matriz is not iterable',
-             '402':'',
-             '403':'',}
+from modulesconfig import ERROR_CODES
 
 class ErrorCode(Exception):
     def __init__(self, code):
