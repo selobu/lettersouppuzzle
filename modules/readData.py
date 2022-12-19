@@ -60,7 +60,7 @@ class CrosswordData(object):
 
     @nrows.setter
     def nrows(self, nrows):
-        if nrows <= 4:
+        if nrows < 4:
             raise ErrorCode(405)
         self._nrows = nrows
 
@@ -70,7 +70,7 @@ class CrosswordData(object):
 
     @ncols.setter
     def ncols(self, ncols):
-        if ncols <= 4:
+        if ncols <4:
             raise ErrorCode(405)
         self._cols = ncols
 
@@ -84,7 +84,7 @@ class CrosswordData(object):
             if not hasattr(row, "__iter__"):
                 raise ErrorCode(402, message=f"row:{pos}")
 
-    def __check_single_character__(character: str):
+    def __check_single_character__(self, character: str):
         """Given a character check if it's allowed, raise a error if not"""
         # converting to uppercase and check equivalent number
         number = ord(character.upper())

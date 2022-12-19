@@ -81,4 +81,4 @@ def test_matrix_not_allowed_character():
         e = exc    
     
     assert e.__class__ == ErrorCode
-    assert e.code == '403'
+    assert e.code == '404'
