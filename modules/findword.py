@@ -48,11 +48,11 @@ def __searchword(word, col: int, rawdata: list) -> list:
     rigth = "".join(rigth)
     res = []
     if len(left) >= wordlen:
-        if word in left:
+        if word == left[wordlen]:
             res.append((len(left) - wordlen, col))
             
     if len(rigth) >= wordlen:
-        if word in rigth:
+        if word == rigth[:wordlen]:
             res.append((col, col + len(word)-1))
     return res
 
@@ -76,6 +76,7 @@ def findWord(word: str, matrix: CrosswordData) -> List[Position]:
     firstchar = word[0]
     # find word positions
     points = list()
+    rows = []
     for rownumber, row in enumerate(matrix):
         for colnumner, char in enumerate(row):
             if char == firstchar:
@@ -88,12 +89,14 @@ def findWord(word: str, matrix: CrosswordData) -> List[Position]:
         col = point.col
         rowdata = matrix[row]
         wordPositions = __searchword(word, col, rowdata)
-        rows = [Position(Point(row, p[0]), Point(row,p[1])) for p in wordPositions]
+        rows.extend([Position(Point(row, p[0]), Point(row,p[1])) for p in wordPositions])
         
     # 1-search vert word
     for col in range(data.ncols):
-        for element in data.getcol(col):
-            
-            wordPositions = __searchword(word, col, rowdata)
-    
+        coldata = data.getcol(col)
+        for rownumber, char in enumerate(coldata):
+            if char == firstchar:
+                wordPosition = __searchword(word, rownumber, coldata)
+                rows.extend([Position( Point(wordP[0], col), Point(wordP[1],col)) for wordP in wordPosition ])
+
     print(rows)

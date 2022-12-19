@@ -20,5 +20,5 @@ if __name__ == "__main__":
 
     data = CrosswordData(matrix)
     data.getcol(0)
-    word2search = "MOROL"
+    word2search = "AUOE"
     positions = findWord(word2search, data)
