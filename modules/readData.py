@@ -5,7 +5,7 @@ from errors import ErrorCode
 def __checkifiterable__(matrix: list) -> bool:
     """Check if matriz is iterable
 
-    Params:
+    Args:
         matrix: iterable of iterables which contains letters from A-Z
 
     Return:
@@ -24,7 +24,7 @@ def __get_matrix_dimensions__(matrix: list) -> list:
     """Check if the matrix dimensions are consistent
     Minimum rows 4, minimum columns 4
 
-    Params:
+    Args:
         matrix: iterable of iterables which contains letters from A-Z
 
     Return:
@@ -45,10 +45,31 @@ def __get_matrix_dimensions__(matrix: list) -> list:
     return (rows, columns)
 
 
+def __check_single_character__(character: str):
+    """Given a character check if it's allowed"""
+    # converting to uppercase and check equivalent number
+    number = ord(character.upper())
+    if 65 <= number <= 90:
+        raise ErrorCode(404, f"{character}")
+
+
+def __testRowContent__(row: list) -> None:
+    """Test if all row elements are considered as an english word
+
+    Args:
+        row (list): list of charactes bettween A-Z
+
+    Returns:
+        bool: True if all elements are valid else raise a error
+    """
+    for character in row:
+        __check_single_character__(character)
+
+
 def readData(matrix: list) -> None:
     """Read  the contents of the matrix and stores as a global variable
 
-    Parameters:
+    Args:
         matriz: iterable of iterables which contains letters from A-Z
 
     Return:
