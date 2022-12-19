@@ -20,7 +20,7 @@ def __validateword__(word: str, maxsize=10):
         raise ErrorCode(408, message=f"len(word) == {len(word)}")
     if len(word) > maxsize:
         raise ErrorCode(409, message=f"len(word) == {len(word)}")
-    not_allowed = [character for character in word if not(65 <= ord(character) <= 90)]
+    not_allowed = [character for character in word if not (65 <= ord(character) <= 90)]
     if len(not_allowed) > 0:
         not_allowed = ", ".join([str(i) for i in not_allowed])
         raise ErrorCode(404, "Word has not allowed characters:[{not_allowed}]")
@@ -50,10 +50,10 @@ def __searchword(word, col: int, rawdata: list) -> list:
     if len(left) >= wordlen:
         if word == left[:wordlen]:
             res.append((len(left) - wordlen, col))
-            
+
     if len(rigth) >= wordlen:
         if word == rigth[:wordlen]:
-            res.append((col, col + len(word)-1))
+            res.append((col, col + len(word) - 1))
     return res
 
 
@@ -89,14 +89,21 @@ def findWord(word: str, matrix: CrosswordData) -> List[Position]:
         col = point.col
         rowdata = matrix[row]
         wordPositions = __searchword(word, col, rowdata)
-        rows.extend([Position(Point(row, p[0]), Point(row,p[1])) for p in wordPositions])
-        
+        rows.extend(
+            [Position(Point(row, p[0]), Point(row, p[1])) for p in wordPositions]
+        )
+
     # 1-search vert word
     for col in range(data.ncols):
         coldata = data.getcol(col)
         for rownumber, char in enumerate(coldata):
             if char == firstchar:
                 wordPosition = __searchword(word, rownumber, coldata)
-                rows.extend([Position( Point(wordP[0], col), Point(wordP[1],col)) for wordP in wordPosition ])
+                rows.extend(
+                    [
+                        Position(Point(wordP[0], col), Point(wordP[1], col))
+                        for wordP in wordPosition
+                    ]
+                )
 
     print(rows)
