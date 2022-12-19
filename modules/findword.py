@@ -1,11 +1,14 @@
-#coding: utf-8
+# coding: utf-8
 
 from .readData import CrosswordData
 from collections import namedtuple
+from typing import List
+
+Point = namedtuple("Point", ["row", "col"])
+Positions = namedtuple("Positions", ["initpoint", "endpoint"])
 
 
-
-def findWord(word:str, matrix:CrosswordData )->list:
+def findWord(word: str, matrix: CrosswordData) -> List[Positions]:
     """find word position in a given matrix
 
     Args:
@@ -13,5 +16,7 @@ def findWord(word:str, matrix:CrosswordData )->list:
         matrix (CrosswordData): character matrix
 
     Returns:
-        list: list of positions
+        list: list of Positions, empty list if not found.
+
+    each position contains two points wich correspond to init and end positions.
     """
