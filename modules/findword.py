@@ -26,6 +26,18 @@ def __validateword__(word: str, maxsize=10):
         raise ErrorCode(404, "Word has not allowed characters:[{not_allowed}]")
 
 
+def __searchword(word, rawdata: list) -> list:
+    """search positions where found the word
+
+    Args:
+        word (_type_): word to be searched
+        rawdata (_type_): list of characters to be found
+
+    Return:
+        list: of Points where the word is found
+    """
+
+
 def findWord(word: str, matrix: CrosswordData) -> List[Positions]:
     """find word position of a given matrix
 
@@ -40,3 +52,21 @@ def findWord(word: str, matrix: CrosswordData) -> List[Positions]:
     """
     data = matrix
     __validateword__(word, maxsize=len(data))
+
+    # getting word's first character
+    firstchar = word[0]
+    wordlen = len(word)
+    # find word positions
+    points = list()
+    for rownumber, row in enumerate(matrix):
+        for colnumner, char in enumerate(row):
+            if char == firstchar:
+                points.append(Point(rownumber, colnumner))
+
+    # for each point
+    # 1-search horz word
+    for point in points:
+        row = point.row
+        col = point.col
+        rowdata = matrix[row]
+        wordPosition = __searchword(rowdata[:col])
