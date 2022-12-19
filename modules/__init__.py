@@ -1,4 +1,4 @@
-__all__ = ['findword', 'CrosswordData']
+__all__ = ["findword", "CrosswordData"]
 
 from .readData import CrosswordData
-from . findword import findWord
+from .findword import findWord
