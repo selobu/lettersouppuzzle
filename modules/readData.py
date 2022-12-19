@@ -74,7 +74,7 @@ class CrosswordData(object):
         found.extend(data)
         diag1 = found, pos2split
         # end main diagonal search
-        
+
         # reverse diagonal search
         currcol = col
         currrow = row
@@ -93,9 +93,9 @@ class CrosswordData(object):
         # join
         found = found[::-1]
         found.extend(data)
-        
-        diag2 = found[::-1], len(data)-1# left to rigth reading direction
-        
+
+        diag2 = found[::-1], len(data) - 1  # left to rigth reading direction
+
         # end reverse diagonal search
 
         return diag1, diag2

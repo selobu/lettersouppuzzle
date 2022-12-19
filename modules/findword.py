@@ -109,25 +109,37 @@ def findWord(word: str, matrix: CrosswordData) -> List[Position]:
     for rownumber, row in enumerate(data):
         for colnumber, element in enumerate(row):
             if element == firstchar:
-                (maindiag, mainsplitpos), (reversediagonal, reversesplitpos) =\
-                   data.getdiagonals(rownumber, colnumber)
+                (maindiag, mainsplitpos), (
+                    reversediagonal,
+                    reversesplitpos,
+                ) = data.getdiagonals(rownumber, colnumber)
                 wordPosition_main = __searchword(word, mainsplitpos, maindiag)
                 if len(wordPosition_main) > 0:
-                    wordPosition_main = [[i-mainsplitpos for i in k ] for k in wordPosition_main]
+                    wordPosition_main = [
+                        [i - mainsplitpos for i in k] for k in wordPosition_main
+                    ]
                     rows.extend(
                         [
-                            Position(Point(rownumber+wp[0], colnumber+wp[0]),\
-                                Point(rownumber+wp[1], colnumber+wp[1]))
+                            Position(
+                                Point(rownumber + wp[0], colnumber + wp[0]),
+                                Point(rownumber + wp[1], colnumber + wp[1]),
+                            )
                             for wp in wordPosition_main
                         ]
                     )
-                wordPosition_reversed = __searchword(word, reversesplitpos, reversediagonal)
+                wordPosition_reversed = __searchword(
+                    word, reversesplitpos, reversediagonal
+                )
                 if len(wordPosition_reversed) > 0:
-                    wordPosition_reversed = [[i-reversesplitpos for i in k ] for k in wordPosition_reversed]
+                    wordPosition_reversed = [
+                        [i - reversesplitpos for i in k] for k in wordPosition_reversed
+                    ]
                     rows.extend(
                         [
-                            Position(Point(rownumber-wp[0], colnumber+wp[0]),\
-                                Point(rownumber-wp[1], colnumber+wp[1]))
+                            Position(
+                                Point(rownumber - wp[0], colnumber + wp[0]),
+                                Point(rownumber - wp[1], colnumber + wp[1]),
+                            )
                             for wp in wordPosition_reversed
                         ]
                     )
