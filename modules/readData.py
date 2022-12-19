@@ -31,6 +31,13 @@ class CrosswordData(object):
     def __getitem__(self, rownumber):
         return self.matrix[rownumber]
 
+    def getcol(self, colnumber: int) -> list:
+        """Returns data contained in the column"""
+        if not(0 < colnumber < self.ncols):
+            raise ErrorCode(405)
+        else:
+            return [row[colnumber] for row in self.matrix]
+    
     @property
     def matrix(self):
         """Return matriz data"""
