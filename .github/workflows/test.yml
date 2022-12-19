@@ -31,9 +31,7 @@ jobs:
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          cd backend
           pip install -e .[test]
       - name: Pytest
         run: |
-          cd backend
           bash scripts/pytest.sh
