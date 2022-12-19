@@ -82,7 +82,7 @@ class CrosswordData(object):
         # checking if row elements are iterable
         for pos, row in enumerate(self.matrix):
             if not hasattr(row, "__iter__"):
-                ErrorCode(402, message=f"row:{pos}")
+                raise ErrorCode(402, message=f"row:{pos}")
 
     def __check_single_character__(character: str):
         """Given a character check if it's allowed, raise a error if not"""
