@@ -109,7 +109,28 @@ def findWord(word: str, matrix: CrosswordData) -> List[Position]:
     for rownumber, row in enumerate(data):
         for colnumber, element in enumerate(row):
             if element == firstchar:
-                diags = data.getdiagonals(rownumber, colnumber)
-                print(diags)
+                (maindiag, mainsplitpos), (reversediagonal, reversesplitpos) =\
+                   data.getdiagonals(rownumber, colnumber)
+                wordPosition_main = __searchword(word, mainsplitpos, maindiag)
+                if len(wordPosition_main) > 0:
+                    wordPosition_main = [[i-mainsplitpos for i in k ] for k in wordPosition_main]
+                    rows.extend(
+                        [
+                            Position(Point(rownumber+wp[0], colnumber+wp[0]),\
+                                Point(rownumber+wp[1], colnumber+wp[1]))
+                            for wp in wordPosition_main
+                        ]
+                    )
+                wordPosition_reversed = __searchword(word, reversesplitpos, reversediagonal)
+                if len(wordPosition_reversed) > 0:
+                    wordPosition_reversed = [[i-reversesplitpos for i in k ] for k in wordPosition_reversed]
+                    rows.extend(
+                        [
+                            Position(Point(rownumber-wp[0], colnumber+wp[0]),\
+                                Point(rownumber-wp[1], colnumber+wp[1]))
+                            for wp in wordPosition_reversed
+                        ]
+                    )
+            pass
 
     print(rows)

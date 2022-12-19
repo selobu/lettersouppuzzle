@@ -44,11 +44,11 @@ class CrosswordData(object):
         Args:
             row (int): row position
             col (int): column position
-            
+
         Return:
-            list: list of diagonals
+            list: list of diagonals -> [maindiagonal, reversediagonal]
         """
-        
+
         if not (0 <= row <= self.nrows):
             raise ErrorCode(409)
         if not (0 <= col <= self.ncols):
@@ -56,13 +56,13 @@ class CrosswordData(object):
         # main diagonal search
         currcol = col
         currrow = row
-        data= []
+        data = []
         while currcol < self.ncols and currrow < self.nrows:
             data.append(self.matrix[currrow][currcol])
-            currcol +=1
-            currrow +=1
-        currcol = col-1
-        currrow = row-1
+            currcol += 1
+            currrow += 1
+        currcol = col - 1
+        currrow = row - 1
         found = []
         while currcol >= 0 and currrow >= 0:
             found.append(self.matrix[currrow][currcol])
@@ -70,12 +70,35 @@ class CrosswordData(object):
             currrow -= 1
         # join
         found = found[::-1]
+        pos2split = len(found)
         found.extend(data)
-        diag1 = found
+        diag1 = found, pos2split
         # end main diagonal search
         
-        return diag1
-              
+        # reverse diagonal search
+        currcol = col
+        currrow = row
+        data = []
+        while currcol >= 0 and currrow < self.nrows:
+            data.append(self.matrix[currrow][currcol])
+            currcol -= 1
+            currrow += 1
+        currcol = col + 1
+        currrow = row - 1
+        found = []
+        while currcol < self.ncols and currrow >= 0:
+            found.append(self.matrix[currrow][currcol])
+            currcol += 1
+            currrow -= 1
+        # join
+        found = found[::-1]
+        found.extend(data)
+        
+        diag2 = found[::-1], len(data)-1# left to rigth reading direction
+        
+        # end reverse diagonal search
+
+        return diag1, diag2
 
     @property
     def matrix(self):
