@@ -100,6 +100,7 @@ def test_matrix_not_allowed_character():
     assert e.__class__ == ErrorCode
     assert e.code == "404"
 
+
 def test_get_column():
     matrix = [
         ["A", "B", "C", "D"],
@@ -116,6 +117,7 @@ def test_get_column():
     assert e.__class__ == ErrorCode
     assert e.code == "408"
 
+
 def test_get_column_2():
     matrix = [
         ["A", "B", "C", "D"],
@@ -131,6 +133,8 @@ def test_get_column_2():
 
     assert e.__class__ == ErrorCode
     assert e.code == "408"
+
+
 def test_get_column_3():
     matrix = [
         ["A", "B", "C", "D"],
@@ -139,4 +143,4 @@ def test_get_column_3():
         ["F", "G", "H", "P"],
     ]
     data = CrosswordData(matrix)
-    assert data.getcol(0) == ["A","C","F","F"]
+    assert data.getcol(0) == ["A", "C", "F", "F"]

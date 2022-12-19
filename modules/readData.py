@@ -79,7 +79,7 @@ class CrosswordData(object):
     def ncols(self, ncols):
         if ncols < 4:
             raise ErrorCode(405)
-        self._cols = ncols
+        self._ncols = ncols
 
     def __checkifiterable__(self):
         """Check if matriz is iterable, raise a error if not"""

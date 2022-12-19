@@ -91,6 +91,9 @@ def findWord(word: str, matrix: CrosswordData) -> List[Position]:
         rows = [Position(Point(row, p[0]), Point(row,p[1])) for p in wordPositions]
         
     # 1-search vert word
-   
+    for col in range(data.ncols):
+        for element in data.getcol(col):
+            
+            wordPositions = __searchword(word, col, rowdata)
     
     print(rows)
