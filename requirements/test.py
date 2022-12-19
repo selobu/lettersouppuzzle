@@ -1,0 +1,13 @@
+blinker
+Faker==2.0.0
+mock==3.0.5
+pytest==7.0.1
+pytest-benchmark==3.4.1
+pytest-cov==4.0.0
+pytest-flask==1.2.0
+pytest-mock==3.6.1
+pytest-profiling==1.7.0
+pytest-cov==4.0.0
+tzlocal
+invoke==1.7.3
+twine==3.8.0
