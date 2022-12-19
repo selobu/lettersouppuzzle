@@ -96,6 +96,8 @@ class CrosswordData(object):
 
         rows_len = [len(row) for row in self.matrix]
         rows = len(rows_len)
+        if rows == 0:
+            raise ErrorCode(407)
         columns = rows_len[0]
 
         not_consisten_rows = [

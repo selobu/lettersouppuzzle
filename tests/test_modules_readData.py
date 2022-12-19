@@ -11,3 +11,24 @@ def test_invalid_matriz():
         e = exc    
     
     assert e.__class__ == ErrorCode
+    assert e.code == '401'
+    
+def test_invalid_matriz_dict():
+    matrix= {}
+    try:
+        CrosswordData(matrix)
+    except Exception as exc:
+        e = exc    
+    
+    assert e.__class__ == ErrorCode
+    assert e.code == '407'
+    
+def test_empty_matriz():
+    matrix= []
+    try:
+        CrosswordData(matrix)
+    except Exception as exc:
+        e = exc    
+    
+    assert e.__class__ == ErrorCode
+    assert e.code == '407'
