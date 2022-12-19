@@ -1,9 +1,9 @@
 **Crowssword Puzzle**
 
-![black](https://github.com/selobu/peakyoutest/actions/workflows/black.yml/badge.svg)
 ![Codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)
 
-
+![black](https://github.com/selobu/peakyoutest/actions/workflows/black.yml/badge.svg)
+![tests](https://github.com/selobu/peakyoutest/actions/workflows/test.yml/badge.svg)
 
 Word Puzzle python program solver in which given a matrix of N rows x M columns
 that contains alphabetic characters, a word can be searched as it is done in the traditional game.
