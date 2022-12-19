@@ -9,6 +9,12 @@ def __checkdimensions__(matrix:list)->bool:
     if not hasattr(matrix, '__iter__'):
         raise ErrorCode(401)
     
+    # checking if row elements are iterable
+    for pos, row in enumerate(matrix):
+        if not hasattr(row, '__iter__'):
+            ErrorCode(402, message=f'row:{pos}')
+            
+    
     
 
 def readData(matrix:list)->None:
