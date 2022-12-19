@@ -24,7 +24,13 @@ class CrosswordData(object):
         self._matrix = [[]]
         self.valid = False  # switch to indicate if matrix data is valid or not
         self.matrix = matrix
-
+    
+    def __len__(self):
+        return self.nrows
+    
+    def __getitem__(self, rownumber):
+        return self.matrix[rownumber]
+        
     @property
     def matrix(self):
         """Return matriz data"""
