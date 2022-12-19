@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "crossword"
 description = "crosswordapp"
-readme = "README.md"
+readme = "read.md"
 requires-python = ">=3.8"
 license = "gpl-3.0"
 authors = [
