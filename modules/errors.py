@@ -1,6 +1,6 @@
 # coding: utf-8
 import difflib  # ref
-from modulesconfig import ERROR_CODES
+from .modulesconfig import ERROR_CODES
 
 
 class ErrorCode(Exception):

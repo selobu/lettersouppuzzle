@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 wxpython = "==4.2.0"
 black = "*"
+pytest = "*"
 
 [dev-packages]
 

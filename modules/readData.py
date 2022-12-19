@@ -1,5 +1,5 @@
 # codign: utf-8
-from errors import ErrorCode
+from .errors import ErrorCode
 
 
 class CrosswordData(object):
