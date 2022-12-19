@@ -19,5 +19,6 @@ if __name__ == "__main__":
     pprint(matrix)
 
     data = CrosswordData(matrix)
+    data.getcol(-1)
     word2search = "MOROL"
     positions = findWord(word2search, data)
