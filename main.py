@@ -3,14 +3,21 @@ __version__ = "0.1.0"
 
 import modules
 from modules.readData import CrosswordData
+from modules.findword import findWord
 from pprint import pprint
 
 if __name__ == "__main__":
     matrix = [
-        ["A", "B", "C", "D"],
-        ["C", "D", "E", "F"],
-        ["F", "G", "H", "U"],
-        ["F", "G", "H", "S"],
+        "DEYQAUG",
+        "XRGTUAV",
+        "SCASABE",
+        "XAJGUHV",
+        "FMOROLB",
+        "gAHJENE",
     ]
+    matrix = [[u for u in s.upper()] for s in matrix]
     pprint(matrix)
-    CrosswordData(matrix)
+    
+    data = CrosswordData(matrix)
+    word2search = 'CASA'
+    positions = findWord(word2search, data)
