@@ -48,7 +48,7 @@ def __searchword(word, col: int, rawdata: list) -> list:
     rigth = "".join(rigth)
     res = []
     if len(left) >= wordlen:
-        if word == left[wordlen]:
+        if word == left[:wordlen]:
             res.append((len(left) - wordlen, col))
             
     if len(rigth) >= wordlen:
