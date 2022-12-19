@@ -38,6 +38,45 @@ class CrosswordData(object):
         else:
             return [row[colnumber] for row in self.matrix]
 
+    def getdiagonals(self, row: int, col: int) -> list:
+        """getting diagonals at a given position
+
+        Args:
+            row (int): row position
+            col (int): column position
+            
+        Return:
+            list: list of diagonals
+        """
+        
+        if not (0 <= row <= self.nrows):
+            raise ErrorCode(409)
+        if not (0 <= col <= self.ncols):
+            raise ErrorCode(408)
+        # main diagonal search
+        currcol = col
+        currrow = row
+        data= []
+        while currcol < self.ncols and currrow < self.nrows:
+            data.append(self.matrix[currrow][currcol])
+            currcol +=1
+            currrow +=1
+        currcol = col-1
+        currrow = row-1
+        found = []
+        while currcol >= 0 and currrow >= 0:
+            found.append(self.matrix[currrow][currcol])
+            currcol -= 1
+            currrow -= 1
+        # join
+        found = found[::-1]
+        found.extend(data)
+        diag1 = found
+        # end main diagonal search
+        
+        return diag1
+              
+
     @property
     def matrix(self):
         """Return matriz data"""

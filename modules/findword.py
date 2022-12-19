@@ -93,7 +93,7 @@ def findWord(word: str, matrix: CrosswordData) -> List[Position]:
             [Position(Point(row, p[0]), Point(row, p[1])) for p in wordPositions]
         )
 
-    # 1-search vert word
+    # 2-search vert word
     for col in range(data.ncols):
         coldata = data.getcol(col)
         for rownumber, char in enumerate(coldata):
@@ -105,5 +105,11 @@ def findWord(word: str, matrix: CrosswordData) -> List[Position]:
                         for wordP in wordPosition
                     ]
                 )
+    # 3- diagonals search
+    for rownumber, row in enumerate(data):
+        for colnumber, element in enumerate(row):
+            if element == firstchar:
+                diags = data.getdiagonals(rownumber, colnumber)
+                print(diags)
 
     print(rows)
