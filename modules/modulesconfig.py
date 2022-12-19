@@ -5,5 +5,5 @@ ERROR_CODES = {
     "404": "Not allowed character ",
     "405": "Minimum rows 4",
     "406": "Minimum cols 4",
-    "407": "Empy matrix"
+    "407": "Empy matrix",
 }

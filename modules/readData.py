@@ -70,7 +70,7 @@ class CrosswordData(object):
 
     @ncols.setter
     def ncols(self, ncols):
-        if ncols <4:
+        if ncols < 4:
             raise ErrorCode(405)
         self._cols = ncols
 
@@ -100,9 +100,7 @@ class CrosswordData(object):
             raise ErrorCode(407)
         columns = rows_len[0]
 
-        not_consisten_rows = [
-            pos for pos, i in enumerate(rows_len) if i != columns
-        ]
+        not_consisten_rows = [pos for pos, i in enumerate(rows_len) if i != columns]
         if len(not_consisten_rows) > 0:
             not_consisten_rows = "".join([str(i) for i in not_consisten_rows])
             raise ErrorCode(403, f"Failing rows: { not_consisten_rows }")
