@@ -1,6 +1,7 @@
 # codign: utf-8
 from errors import ErrorCode
-def __checkdimensions__(matrix:list)->bool:
+
+def __checkifiterable__(matrix:list)->bool:
     """Check if the matrix dimensions are consistent
     
     Return:
@@ -13,8 +14,6 @@ def __checkdimensions__(matrix:list)->bool:
     for pos, row in enumerate(matrix):
         if not hasattr(row, '__iter__'):
             ErrorCode(402, message=f'row:{pos}')
-            
-    
     
 
 def readData(matrix:list)->None:
