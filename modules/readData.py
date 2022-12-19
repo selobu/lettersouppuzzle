@@ -88,7 +88,7 @@ class CrosswordData(object):
         """Given a character check if it's allowed, raise a error if not"""
         # converting to uppercase and check equivalent number
         number = ord(character.upper())
-        if 65 <= number <= 90:
+        if not (65 <= number <= 90):
             raise ErrorCode(404, f"{character}")
 
     def __get_matrix_dimensions__(self) -> list:
