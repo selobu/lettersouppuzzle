@@ -18,7 +18,7 @@ Item   | status | pending
 ----|-----|------
 checkCrosswordData |  ![100%](https://progress-bar.dev/100) | -
 CrosswordData- Tests |  ![100%](https://progress-bar.dev/100) | 
-searchWord | ![0%](https://progress-bar.dev/0) | -
+searchWord | ![50%](https://progress-bar.dev/50) | diagnonal search
 searchWordTest | ![0%](https://progress-bar.dev/0) | -
 GUI | ![0%](https://progress-bar.dev/0) | -
 
