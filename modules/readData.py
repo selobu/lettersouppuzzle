@@ -2,8 +2,8 @@
 from errors import ErrorCode
 
 
-class CrosswordData:
-    """Read  the contents of the matrix and stores as a global variable
+class CrosswordData(object):
+    """Read  the contents of the matrix
 
     Args:
         matriz: iterable of iterables which contains letters from A-Z
@@ -14,14 +14,39 @@ class CrosswordData:
     """
 
     def __init__(self, matrix: list):
+        """get the matrix data and initialize it
+
+        Args:
+            matrix (list): data matrix
+        """
+        self._nrows = 0
+        self._ncols = 0
+        self._matrix = [[]]
+        self.valid = False  # switch to indicate if matrix data is valid or not
+        self.matrix = matrix
+
+    @property
+    def matrix(self):
+        """Return matriz data"""
+        return self._matrix
+
+    @matrix.setter
+    def matrix(self, matrixdata):
+        """stores the matrix data and check if the data is valid
+
+        Args:
+            matrixdata (iterable): matrix data as iterable of iterables
+        """
         self._nrows = 0
         self._ncols = 0
         self.valid = False  # switch to indicate if matrix data is valid or not
-        self.matrix = matrix
+        self._matrix = matrixdata
         self.__checkifiterable__()
         self.nrows, self.ncols = self.__get_matrix_dimensions__()
         for row in self.matrix:
             self.__testRowContent__(row)
+        self.valid = True
+        self._matrix = matrixdata
 
     @property
     def nrows(self):
