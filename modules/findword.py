@@ -6,7 +6,7 @@ from .errors import ErrorCode
 from typing import List
 
 Point = namedtuple("Point", ["row", "col"])
-Positions = namedtuple("Positions", ["initpoint", "endpoint"])
+Position = namedtuple("Positions", ["initpoint", "endpoint"])
 
 
 def __validateword__(word: str, maxsize=10):
@@ -20,25 +20,44 @@ def __validateword__(word: str, maxsize=10):
         raise ErrorCode(408, message=f"len(word) == {len(word)}")
     if len(word) > maxsize:
         raise ErrorCode(409, message=f"len(word) == {len(word)}")
-    not_allowed = [character for character in word if 65 <= ord(character) <= 90]
+    not_allowed = [character for character in word if not(65 <= ord(character) <= 90)]
     if len(not_allowed) > 0:
         not_allowed = ", ".join([str(i) for i in not_allowed])
         raise ErrorCode(404, "Word has not allowed characters:[{not_allowed}]")
 
 
-def __searchword(word, rawdata: list) -> list:
-    """search positions where found the word
+def __searchword(word, col: int, rawdata: list) -> list:
+    """searching positions in the rawdata
 
     Args:
         word (_type_): word to be searched
+        col (int): place to split the array and check
         rawdata (_type_): list of characters to be found
 
     Return:
-        list: of Points where the word is found
+        list: positions where the word were found
     """
+    wordlen = len(word)
+    if wordlen > len(rawdata):
+        return []
+    left = rawdata[:col]
+    left.append(word[0])
+    rigth = rawdata[col:]
+    left = left[::-1]
+    left = "".join(left)
+    rigth = "".join(rigth)
+    res = []
+    if len(left) >= wordlen:
+        if word in left:
+            res.append((len(left) - wordlen, col))
+            
+    if len(rigth) >= wordlen:
+        if word in rigth:
+            res.append((col, col + len(word)-1))
+    return res
 
 
-def findWord(word: str, matrix: CrosswordData) -> List[Positions]:
+def findWord(word: str, matrix: CrosswordData) -> List[Position]:
     """find word position of a given matrix
 
     Args:
@@ -55,7 +74,6 @@ def findWord(word: str, matrix: CrosswordData) -> List[Positions]:
 
     # getting word's first character
     firstchar = word[0]
-    wordlen = len(word)
     # find word positions
     points = list()
     for rownumber, row in enumerate(matrix):
@@ -69,4 +87,6 @@ def findWord(word: str, matrix: CrosswordData) -> List[Positions]:
         row = point.row
         col = point.col
         rowdata = matrix[row]
-        wordPosition = __searchword(rowdata[:col])
+        wordPositions = __searchword(word, col, rowdata)
+        rows = [Position(Point(row, p[0]), Point(row,p[1])) for p in wordPositions]
+    print(rows)

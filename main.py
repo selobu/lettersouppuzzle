@@ -17,7 +17,7 @@ if __name__ == "__main__":
     ]
     matrix = [[u for u in s.upper()] for s in matrix]
     pprint(matrix)
-    
+
     data = CrosswordData(matrix)
-    word2search = 'CASA'
+    word2search = "MOROL"
     positions = findWord(word2search, data)
