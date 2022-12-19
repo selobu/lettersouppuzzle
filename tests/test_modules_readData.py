@@ -32,3 +32,13 @@ def test_empty_matriz():
     
     assert e.__class__ == ErrorCode
     assert e.code == '407'
+
+def test_single_row_matrix():
+    matrix= [['A','B','C']]
+    try:
+        CrosswordData(matrix)
+    except Exception as exc:
+        e = exc    
+    
+    assert e.__class__ == ErrorCode
+    assert e.code == '402'

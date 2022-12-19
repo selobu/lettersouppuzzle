@@ -101,7 +101,7 @@ class CrosswordData(object):
         columns = rows_len[0]
 
         not_consisten_rows = [
-            pos for pos, i in enumerate(rows_len) if len(i) == columns
+            pos for pos, i in enumerate(rows_len) if i != columns
         ]
         if len(not_consisten_rows) > 0:
             not_consisten_rows = "".join(not_consisten_rows)

@@ -2,5 +2,5 @@ import modules
 from modules.readData import CrosswordData
 
 if __name__ == "__main__":
-    matrix = {}
+    matrix =  [['A','B','C']]
     CrosswordData(matrix)
