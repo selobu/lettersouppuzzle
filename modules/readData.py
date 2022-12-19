@@ -1,5 +1,5 @@
 # codign: utf-8
-
+from errors import ErrorCode
 def __checkdimensions__(matrix:list)->bool:
     """Check if the matrix dimensions are consistent
     
@@ -7,7 +7,8 @@ def __checkdimensions__(matrix:list)->bool:
         Boolean: True if the dimensions are right
     """
     if not hasattr(matrix, '__iter__'):
-        raise CustomError()
+        raise ErrorCode(401)
+    
     
 
 def readData(matrix:list)->None:
