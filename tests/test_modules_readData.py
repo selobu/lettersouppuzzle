@@ -41,4 +41,24 @@ def test_single_row_matrix():
         e = exc    
     
     assert e.__class__ == ErrorCode
-    assert e.code == '402'
+    assert e.code == '405'
+
+def test_small_matrix():
+    matrix= [['A','B','C'],['C','D','E'],['F','G','H']]
+    try:
+        CrosswordData(matrix)
+    except Exception as exc:
+        e = exc    
+    
+    assert e.__class__ == ErrorCode
+    assert e.code == '405'
+    
+def test_matrix_missing_column():
+    matrix= [['A','B','C','D'],['C','D','E','F'],['F','G','H']]
+    try:
+        CrosswordData(matrix)
+    except Exception as exc:
+        e = exc    
+    
+    assert e.__class__ == ErrorCode
+    assert e.code == '405'

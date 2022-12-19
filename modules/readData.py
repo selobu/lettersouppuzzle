@@ -104,7 +104,7 @@ class CrosswordData(object):
             pos for pos, i in enumerate(rows_len) if i != columns
         ]
         if len(not_consisten_rows) > 0:
-            not_consisten_rows = "".join(not_consisten_rows)
+            not_consisten_rows = "".join([str(i) for i in not_consisten_rows])
             raise ErrorCode(403, f"Failing rows: { not_consisten_rows }")
         return (rows, columns)
 
