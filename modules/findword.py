@@ -9,7 +9,7 @@ Positions = namedtuple("Positions", ["initpoint", "endpoint"])
 
 
 def findWord(word: str, matrix: CrosswordData) -> List[Positions]:
-    """find word position in a given matrix
+    """find word position of a given matrix
 
     Args:
         word (str): word to be searched
