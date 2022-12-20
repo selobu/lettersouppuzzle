@@ -16,7 +16,7 @@ class CrosswordData(object):
         self._nrows = 0
         self._ncols = 0
         self._matrix = [[]]
-        self.allowedCharacters = allowedCharacters
+        self.allowedCharacters = allowedCharacters 
         self.valid = False  # switch to indicate if matrix data is valid or not
         self.matrix = matrix
 
@@ -117,6 +117,8 @@ class CrosswordData(object):
             self.__testRowContent__(row)
         self.valid = True
         self._matrix = matrixdata
+        # saving data in current directory
+        
 
     @property
     def nrows(self):
