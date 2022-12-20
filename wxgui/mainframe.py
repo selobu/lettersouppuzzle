@@ -61,7 +61,7 @@ class MainFrame(wx.Frame):
             parent,
             -1,
             title=title,
-            size=wx.Size(ca[2] // 2, (ca[-1]*2)//3),
+            size=wx.Size(ca[2] // 2, (ca[-1] * 2) // 3),
             pos=(ca[0], ca[1]),
             style=style,
         )
