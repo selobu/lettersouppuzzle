@@ -22,14 +22,20 @@ class MainFrame(wx.Frame):
             pos=(ca[0], ca[1]),
             style=style,
         )
-        self.start_button = wx.Button(self, -1, "Search")
+        self.search_btn = wx.Button(self, -1, "Search")
+        self.reset = wx.Button(self, -1, "Reset")
         self.create_ui()
         self.CreateMenuAndStatusBar()
         self.CenterOnScreen()
         self.Layout()
-        self.Bind(wx.EVT_BUTTON, self.onsearch, self.start_button)
+        self.Bind(wx.EVT_BUTTON, self.onsearch, self.search_btn)
+        self.Bind(wx.EVT_BUTTON, self.onreset, self.reset)
+        
         wx.CallAfter(self.populateinitdata)
 
+    def onreset(self, evt):
+         self.populateinitdata()
+     
     def create_ui(self):
         main_sizer = wx.BoxSizer(wx.VERTICAL)
         top_sizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -37,7 +43,7 @@ class MainFrame(wx.Frame):
         top_center_sizer = wx.BoxSizer(wx.VERTICAL)
 
         top_sizer.Add(
-            self.start_button,
+            self.reset,
             0,
             wx.ALL | wx.ALIGN_CENTER_HORIZONTAL | wx.ALIGN_CENTER_VERTICAL,
             10,
@@ -47,6 +53,7 @@ class MainFrame(wx.Frame):
         wx.CallAfter(self.searchword.SetInsertionPoint, 0)
 
         top_center_sizer.Add(self.searchword, 0, wx.ALL | wx.ALIGN_RIGHT, 5)
+        top_center_sizer.Add(self.search_btn, 0, wx.ALL | wx.ALIGN_RIGHT, 5)
 
         top_sizer.Add(top_center_sizer, 0, wx.EXPAND, 0)
 
