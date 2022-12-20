@@ -3,25 +3,20 @@ from .errors import ErrorCode
 
 
 class CrosswordData(object):
-    """Read  the contents of the matrix
+    """Read  the contents of the matrix"""
 
-    Args:
-        matriz: iterable of iterables which contains letters from A-Z
-        Minimum dmensions: rows 4, columns 4"
-
-    Return:
-        None
-    """
-
-    def __init__(self, matrix: list):
+    def __init__(self, matrix: list, allowedCharacters: list = []):
         """get the matrix data and initialize it
 
         Args:
-            matrix (list): data matrix
+            matrix (list): iterable of iterables which contains a list of single characters
+                - Minimum dmensions: rows 4, columns 4"
+            allowedCharacters (list): list of allowed characters, if not then only A-Z allowed
         """
         self._nrows = 0
         self._ncols = 0
         self._matrix = [[]]
+        self.allowedCharacters = allowedCharacters
         self.valid = False  # switch to indicate if matrix data is valid or not
         self.matrix = matrix
 
@@ -156,9 +151,13 @@ class CrosswordData(object):
     def __check_single_character__(self, character: str):
         """Given a character check if it's allowed, raise a error if not"""
         # converting to uppercase and check equivalent number
-        number = ord(character.upper())
-        if not (65 <= number <= 90):
-            raise ErrorCode(404, f"{character}")
+        if len(self.allowedCharacters) == 0:
+            number = ord(character.upper())
+            if not (65 <= number <= 90):
+                raise ErrorCode(404, f"{character}")
+        else:
+            if character not in self.allowedCharacters:
+                raise ErrorCode(404, f"{character}")
 
     def __get_matrix_dimensions__(self) -> list:
         """Check if the matrix dimensions are consistent, , raise a error if not"""
