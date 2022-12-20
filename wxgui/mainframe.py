@@ -7,6 +7,49 @@ from modules.readData import CrosswordData
 from modules.findword import findWord
 
 
+class TestSearchCtrl(wx.SearchCtrl):
+    maxSearches = 5
+
+    def __init__(
+        self,
+        parent,
+        id=-1,
+        value="",
+        pos=wx.DefaultPosition,
+        size=wx.DefaultSize,
+        style=0,
+        doSearch=None,
+    ):
+        style |= wx.TE_PROCESS_ENTER
+        wx.SearchCtrl.__init__(self, parent, id, value, pos, size, style)
+        self.Bind(wx.EVT_TEXT_ENTER, self.OnTextEntered)
+        self.Bind(wx.EVT_SEARCHCTRL_SEARCH_BTN, self.OnTextEntered)
+        self.Bind(wx.EVT_MENU_RANGE, self.OnMenuItem, id=1, id2=self.maxSearches)
+        self.doSearch = doSearch
+        self.searches = []
+
+    def OnTextEntered(self, evt):
+        text = self.GetValue()
+        if self.doSearch(text):
+            self.searches.append(text)
+            if len(self.searches) > self.maxSearches:
+                del self.searches[0]
+            self.SetMenu(self.MakeMenu())
+        self.SetValue("")
+
+    def OnMenuItem(self, evt):
+        text = self.searches[evt.GetId() - 1]
+        self.doSearch(text)
+
+    def MakeMenu(self):
+        menu = wx.Menu()
+        item = menu.Append(-1, "Recent Searches")
+        item.Enable(False)
+        for idx, txt in enumerate(self.searches):
+            menu.Append(1 + idx, txt)
+        return menu
+
+
 class MainFrame(wx.Frame):
     no_caption = [wx.DEFAULT_FRAME_STYLE, wx.NO_FULL_REPAINT_ON_RESIZE][0]
 
@@ -18,51 +61,23 @@ class MainFrame(wx.Frame):
             parent,
             -1,
             title=title,
-            size=wx.Size(ca[2], ca[-1]),
+            size=wx.Size(ca[2] // 2, (ca[-1]*2)//3),
             pos=(ca[0], ca[1]),
             style=style,
         )
-        self.search_btn = wx.Button(self, -1, "Search")
-        self.reset = wx.Button(self, -1, "Reset")
         self.create_ui()
         self.CreateMenuAndStatusBar()
         self.CenterOnScreen()
         self.Layout()
-        self.Bind(wx.EVT_BUTTON, self.onsearch, self.search_btn)
-        self.Bind(wx.EVT_BUTTON, self.onreset, self.reset)
-        
+
         wx.CallAfter(self.populateinitdata)
 
     def onreset(self, evt):
-         self.populateinitdata()
-     
+        self.populateinitdata()
+
     def create_ui(self):
         main_sizer = wx.BoxSizer(wx.VERTICAL)
         top_sizer = wx.BoxSizer(wx.HORIZONTAL)
-        top_right_sizer = wx.BoxSizer(wx.VERTICAL)
-        top_center_sizer = wx.BoxSizer(wx.VERTICAL)
-
-        top_sizer.Add(
-            self.reset,
-            0,
-            wx.ALL | wx.ALIGN_CENTER_HORIZONTAL | wx.ALIGN_CENTER_VERTICAL,
-            10,
-        )
-
-        self.searchword = wx.TextCtrl(self, -1, "", size=(125, -1))
-        wx.CallAfter(self.searchword.SetInsertionPoint, 0)
-
-        top_center_sizer.Add(self.searchword, 0, wx.ALL | wx.ALIGN_RIGHT, 5)
-        top_center_sizer.Add(self.search_btn, 0, wx.ALL | wx.ALIGN_RIGHT, 5)
-
-        top_sizer.Add(top_center_sizer, 0, wx.EXPAND, 0)
-
-        label_xlrd = wx.StaticText(self, -1, "Buscar")
-        top_right_sizer.Add(label_xlrd, 0, wx.ALL, 5)
-        top_right_sizer.Add((0, 0), 1, wx.EXPAND, 0)
-
-        main_sizer.Add(top_sizer, 0, wx.ALL | wx.EXPAND, 5)
-        main_sizer.Add((0, 10))
 
         self.sheet = SimpleGrid(self)
         main_sizer.Add(self.sheet, 1, wx.ALL | wx.EXPAND, 5)
@@ -71,7 +86,58 @@ class MainFrame(wx.Frame):
         main_sizer.Layout()
 
     def CreateMenuAndStatusBar(self):
-        pass
+        TBFLAGS = (
+            wx.TB_HORIZONTAL
+            | wx.NO_BORDER
+            | wx.TB_FLAT
+            # | wx.TB_TEXT
+            # | wx.TB_HORZ_LAYOUT
+        )
+        self.tb = tb = self.CreateToolBar(TBFLAGS)
+        tsize = (24, 24)
+        null_bmp = wx.BitmapBundle(wx.NullBitmap)
+        new_bmp = wx.ArtProvider.GetBitmapBundle(wx.ART_NEW, wx.ART_TOOLBAR, tsize)
+        tb.AddTool(
+            10,
+            "New",
+            new_bmp,
+            null_bmp,
+            wx.ITEM_NORMAL,
+            "New",
+            "Reset the crossword",
+            None,
+        )
+        self.Bind(wx.EVT_TOOL, self.OnToolClick, id=10)
+        tb.AddSeparator()
+        cbID = wx.NewIdRef()
+        self.colsCtrl = wx.ComboBox(
+            tb,
+            cbID,
+            "",
+            choices=[str(i) for i in range(4, 50)],
+            size=(50, -1),
+            style=wx.CB_DROPDOWN,
+        )
+        tb.AddControl(self.colsCtrl)
+
+        tb.AddStretchableSpace()
+        self.search = TestSearchCtrl(tb, size=(150, -1), doSearch=self.DoSearch)
+        tb.AddControl(self.search)
+
+        self.Bind(wx.EVT_COMBOBOX, self.Onchangerows, id=cbID)
+        tb.Realize()
+
+    def OnToolClick(self, evt=None):
+        self.onreset(evt)
+
+    def Onchangerows(self, evt):
+        rows = int(self.colsCtrl.Value)
+
+    def DoSearch(self, evt):
+        word2search = self.search.Value.upper()
+        matrix = CrosswordData(self.sheet.data)
+        result = findWord(word2search, matrix)
+        self.sheet.displayresult(result)
 
     def populateinitdata(self, *args):
         matrix = [

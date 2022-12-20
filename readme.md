@@ -14,17 +14,16 @@ The word can be found horizontal and vertically and on any of the diagonals of t
 
 Project status
 
-Item   | status | pending
+Item   | status | missing
 ----|-----|------
 checkCrosswordData |  ![100%](https://progress-bar.dev/100) | -
 CrosswordData- Tests |  ![100%](https://progress-bar.dev/100) | 
 searchWord | ![100%](https://progress-bar.dev/100) | -
 searchWordTest | ![100%](https://progress-bar.dev/100) | -
-GUI | ![0%](https://progress-bar.dev/0) | wxpython gui
+GUI | ![80%](https://progress-bar.dev/80) | reload last game
 
 
-
-Ascii valid characters 65 up to 90 included
+Ascii valid characters 65 up to 90 included by default
 
 ![ascii reference](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/ASCII-Table-wide.svg/1280px-ASCII-Table-wide.svg.png)
 
