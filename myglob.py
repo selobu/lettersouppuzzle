@@ -1,8 +1,7 @@
-__all__ = ['SEGUNUPDATETAREAS'
-           'VERSION', 'PROG_NAME', 'CONFIG']
+__all__ = ["SEGUNUPDATETAREAS" "VERSION", "PROG_NAME", "CONFIG"]
 
 from configuration import config
-from os.path import  abspath, dirname
+from os.path import abspath, dirname
 from os import getcwd
 import sys
 import wx
