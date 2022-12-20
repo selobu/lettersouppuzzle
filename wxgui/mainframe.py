@@ -71,36 +71,3 @@ class SimpleGrid(gridlib.Grid):
         for rownumber, row in enumerate(matrix):
             for colnumber, element in enumerate(row):
                 self.SetCellValue(rownumber, colnumber, str(element))
-
-
-class XLSGridPanel(wx.Panel):
-    def __init__(self, parent):
-
-        wx.Panel.__init__(self, parent)
-
-        self.grid = SimpleGrid(self)
-
-        self.grid.Hide()
-
-        self.DoLayout()
-
-    def DoLayout(self):
-        main_sizer = wx.BoxSizer(wx.VERTICAL)
-        top_center_sizer = wx.BoxSizer(wx.VERTICAL)
-        top_center_sizer.Add((0, 0), 1, wx.EXPAND, 0)
-        main_sizer.Add((0, 10))
-        main_sizer.Add(self.grid, 1, wx.ALL | wx.EXPAND, 5)
-        self.SetSizer(main_sizer)
-        self.OnStart()
-
-        main_sizer.Layout()
-
-    def OnStart(self, event=None):
-
-        busy = wx.BusyInfo("Reading contents, please wait...")
-
-        del busy
-
-        self.grid.Show()
-
-        self.Layout()
