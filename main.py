@@ -74,7 +74,7 @@ class MyApp(wx.App):
             installDir = os.path.dirname(os.path.abspath(sys.argv[0]))
 
         # decoding the path name
-        self.installDir = installDir  # .decode(encoding=sys.getfilesystemencoding())
+        self.installDir = installDir
 
         language = self.GetPreferences("Language")
         if not language:
@@ -179,13 +179,12 @@ class MyApp(wx.App):
 
 
 if __name__ == "__main__":
-    # arguments = docopt(__doc__)
     debug = True
     if platform.system() == "Linux":
         import time
 
         time.sleep(0.5)
-    app = MyApp(debug=debug)  # redirect=False
+    app = MyApp(debug=debug)
     app.MainLoop()
     del app
 
