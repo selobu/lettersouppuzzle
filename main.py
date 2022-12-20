@@ -19,6 +19,6 @@ if __name__ == "__main__":
     pprint(matrix)
 
     data = CrosswordData(matrix)
-    data.getcol(0)
-    word2search = "USG"
+    word2search = "JOHE"
     positions = findWord(word2search, data)
+    print(str(positions))

@@ -33,7 +33,7 @@ class CrosswordData(object):
 
     def getcol(self, colnumber: int) -> list:
         """Returns data contained in the column"""
-        if not (0 <= colnumber <= self.ncols):
+        if not (0 <= colnumber < self.ncols):
             raise ErrorCode(408)
         else:
             return [row[colnumber] for row in self.matrix]

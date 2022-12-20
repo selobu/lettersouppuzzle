@@ -144,5 +144,4 @@ def findWord(word: str, matrix: CrosswordData) -> List[Position]:
                         ]
                     )
             pass
-
-    print(rows)
+    return rows
