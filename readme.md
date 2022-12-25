@@ -1,4 +1,4 @@
-**Crowssword Puzzle**
+**Letter soup Puzzle**
 
 ![Codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)
 
@@ -7,7 +7,7 @@
 
 [![Python Version](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue)](https://www.python.org/downloads/release/python-390/)
 
-Word Puzzle python program solver in which given a matrix of N rows x M columns
+Letter soup puzzle python program solver in which given a matrix of N rows x M columns
 that contains alphabetic characters, a word can be searched as it is done in the traditional game.
 The word can be found horizontal and vertically and on any of the diagonals of the matrix
 
