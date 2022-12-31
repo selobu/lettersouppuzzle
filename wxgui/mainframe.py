@@ -162,6 +162,7 @@ class MainFrame(wx.Frame):
 class SimpleGrid(gridlib.Grid):
     def __init__(self, parent):
         gridlib.Grid.__init__(self, parent, -1)
+        self.fixstyle()
         self.moveTo = None
         self.create()
 
