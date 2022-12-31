@@ -163,6 +163,8 @@ class SimpleGrid(gridlib.Grid):
     def __init__(self, parent):
         gridlib.Grid.__init__(self, parent, -1)
         self.SetDefaultCellAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
+        self.SetColLabelSize(0)
+        self.SetRowLabelSize(0)
         self.SetDefaultColSize(50)
         self.SetDefaultRowSize(50)
         self.moveTo = None
