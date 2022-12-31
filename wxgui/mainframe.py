@@ -162,13 +162,15 @@ class MainFrame(wx.Frame):
 class SimpleGrid(gridlib.Grid):
     def __init__(self, parent):
         gridlib.Grid.__init__(self, parent, -1)
+        self.moveTo = None
+        self.create()
+
+    def fixstyle(self):
         self.SetDefaultCellAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
         self.SetColLabelSize(0)
         self.SetRowLabelSize(0)
         self.SetDefaultColSize(50)
         self.SetDefaultRowSize(50)
-        self.moveTo = None
-        self.create()
 
     def create(self, nrows: int = 25, ncols: int = 25):
         """Create initial sheet dimensions
